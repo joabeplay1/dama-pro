@@ -24,7 +24,8 @@ const loadDriveBtn = document.getElementById("loadDriveMusic");
 let board = [];
 let currentPlayer = "player"; // "player" or "ai"
 let selectedPiece = null; // { row, col }
-let moveHistory = []; // Stores board states for undo
+let moveHistory = []; // Stores board states and current players for undo
+let gameOver = false; // Controle de estado para evitar vitória duplicada
 
 // Score and Storage
 const STORAGE_KEY = "joabe_play_damas_save";
@@ -35,15 +36,32 @@ const SOUND_STORAGE_KEY = "joabe_play_sound_state";
 let playerScore = 0;
 let aiScore = 0;
 
-// Audio
-const backgroundMusic = new Audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"); // Example music
-const moveAudio = new Audio("https://www.soundjay.com/buttons/button-1.mp3"); // Example move sound
-const captureAudio = new Audio("https://www.soundjay.com/misc/fart-01.mp3"); // Example capture sound
-const victoryAudio = new Audio("https://www.soundjay.com/misc/applause-01.mp3"); // Example victory sound
+// Audio - Links corrigidos para evitar Erros 404
+const backgroundMusic = new Audio("https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3"); 
+const moveAudio = new Audio("https://assets.mixkit.co/active_storage/sfx/2571/2571-preview.mp3"); 
+const captureAudio = new Audio("https://assets.mixkit.co/active_storage/sfx/2003/2003-preview.mp3"); 
+const victoryAudio = new Audio("https://www.soundjay.com/misc/applause-01.mp3"); 
 
 backgroundMusic.loop = true;
 let isMusicOn = true;
 let isSoundOn = true;
+
+// --- Helper Functions ---
+
+// Extrai IDs do Google Drive usando múltiplos padrões de URL
+function extractDriveFileId(url) {
+    const patterns = [
+        /\/d\/([a-zA-Z0-9_-]+)/,
+        /id=([a-zA-Z0-9_-]+)/,
+        /file\/d\/([a-zA-Z0-9_-]+)/
+    ];
+
+    for (const pattern of patterns) {
+        const match = url.match(pattern);
+        if (match) return match[1];
+    }
+    return null;
+}
 
 // --- Core Game Logic ---
 
@@ -112,7 +130,7 @@ function renderBoard() {
                 cell.appendChild(pieceElement);
             }
 
-            cell.addEventListener("click", cellClick);
+            // Ouvinte de evento removido daqui para implementação de delegação de evento no escopo global
             boardElement.appendChild(cell);
         }
     }
@@ -211,7 +229,10 @@ function promoteIfNeeded(piece, row) {
 }
 
 function saveHistory() {
-    moveHistory.push(JSON.stringify(board));
+    moveHistory.push(JSON.stringify({
+        board,
+        currentPlayer
+    }));
     if (moveHistory.length > 30) {
         moveHistory.shift(); 
     }
@@ -245,6 +266,7 @@ function attemptMove(fromRow, fromCol, toRow, toCol) {
         const nextCaptures = getCaptures(toRow, toCol);
 
         if (nextCaptures.length) {
+            statusText.textContent = "Continue capturando a mesma peça";
             renderBoard();
             checkVictory();
             saveGame();
@@ -373,6 +395,9 @@ function checkVictory() {
 }
 
 function showVictory(winner) {
+    if (gameOver) return;
+    gameOver = true;
+
     victoryScreen.classList.remove("hidden");
     victoryTitle.textContent = winner + " VENCEU";
     if (winner === "VOCÊ") {
@@ -394,10 +419,13 @@ playAgainBtn.addEventListener("click", () => {
 
 undoBtn.addEventListener("click", () => {
     if (!moveHistory.length) return;
-    board = JSON.parse(moveHistory.pop());
+    
+    const state = JSON.parse(moveHistory.pop());
+    board = state.board;
+    currentPlayer = state.currentPlayer;
+    
     selectedPiece = null;
-    currentPlayer = "player"; 
-    statusText.textContent = "Sua vez";
+    statusText.textContent = currentPlayer === "player" ? "Sua vez" : "IA pensando...";
     renderBoard();
     saveGame();
 });
@@ -412,6 +440,7 @@ function saveGame() {
 
 function loadGame() {
     const save = localStorage.getItem(STORAGE_KEY);
+    gameOver = false;
     if (!save) {
         createInitialBoard();
         return;
@@ -427,6 +456,7 @@ function loadGame() {
 }
 
 function resetGame() {
+    gameOver = false;
     selectedPiece = null;
     currentPlayer = "player";
     moveHistory = [];
@@ -464,7 +494,7 @@ function getSimpleMoves(row, col) {
         for (const [dr, dc] of dirs) {
             let r = row + dr;
             let c = col + dc;
-            while (insideBoard(r, c) && !board[r][c]) {
+            while (insideBoard(r, c) && board[r][c] === null) {
                 moves.push({ toRow: r, toCol: c });
                 r += dr;
                 c += dc;
@@ -555,264 +585,3 @@ function evaluateBoard() {
             if (piece.player === "ai") {
                 score += value;
             } else {
-                score -= value;
-            }
-        }
-    }
-    return score;
-}
-
-function hardAI() {
-    const moves = getAllPossibleMoves();
-    if (!moves.length) {
-        showVictory("VOCÊ");
-        return;
-    }
-
-    let bestMove = null;
-    let bestScore = -Infinity; 
-
-    for (const move of moves) {
-        const clone = JSON.parse(JSON.stringify(board)); 
-        simulateMove(move);
-        const score = evaluateBoard();
-        board = JSON.parse(JSON.stringify(clone)); 
-
-        if (score > bestScore) {
-            bestScore = score;
-            bestMove = move;
-        }
-    }
-    executeAIMove(bestMove);
-}
-
-function simulateMove(move) {
-    const piece = board[move.fromRow][move.fromCol];
-    board[move.toRow][move.toCol] = piece;
-    board[move.fromRow][move.fromCol] = null;
-
-    if (move.type === "capture") {
-        board[move.captureRow][move.captureCol] = null;
-    }
-    promoteIfNeeded(piece, move.toRow); 
-}
-
-function executeAIMove(move) {
-    setTimeout(() => {
-        saveHistory(); 
-        const piece = board[move.fromRow][move.fromCol];
-        board[move.toRow][move.toCol] = piece;
-        board[move.fromRow][move.fromCol] = null;
-
-        if (move.type === "capture") {
-            board[move.captureRow][move.captureCol] = null;
-            playCaptureSound(move.captureRow, move.captureCol);
-        } else {
-            playMoveSound();
-        }
-
-        promoteIfNeeded(piece, move.toRow);
-
-        selectedPiece = { row: move.toRow, col: move.toCol };
-        const nextCaptures = getCaptures(move.toRow, move.toCol);
-
-        if (nextCaptures.length && move.type === "capture") {
-            statusText.textContent = "IA fazendo múltiplas capturas...";
-            let bestNextCapture = null;
-            let bestNextScore = -Infinity;
-            for (const nextCap of nextCaptures) {
-                const clone = JSON.parse(JSON.stringify(board));
-                simulateMove({ type: "capture", fromRow: move.toRow, fromCol: move.toCol, ...nextCap });
-                const score = evaluateBoard();
-                board = JSON.parse(JSON.stringify(clone));
-                if (score > bestNextScore) {
-                    bestNextScore = score;
-                    bestNextCapture = { type: "capture", fromRow: move.toRow, fromCol: move.toCol, ...nextCap };
-                }
-            }
-            if (bestNextCapture) {
-                executeAIMove(bestNextCapture); 
-                return;
-            }
-        }
-
-        selectedPiece = null; 
-        currentPlayer = "player";
-        statusText.textContent = "Sua vez";
-        if (!checkVictory()) {
-            saveGame();
-            renderBoard();
-        }
-    }, 600); 
-}
-
-function switchTurn() {
-    currentPlayer = currentPlayer === "player" ? "ai" : "player";
-
-    if (currentPlayer === "player") {
-        statusText.textContent = "Sua vez";
-        return;
-    }
-
-    statusText.textContent = "IA pensando...";
-    const level = getDifficulty();
-
-    setTimeout(() => {
-        if (checkVictory()) return; 
-
-        if (level === "easy") {
-            easyAI();
-        } else if (level === "medium") {
-            mediumAI();
-        } else {
-            hardAI();
-        }
-    }, 500);
-}
-
-// --- Visuals, Audio, Optimizations ---
-
-function explodeParticles(row, col) {
-    if (!isSoundOn) return; 
-
-    const cellElement = boardElement.querySelector(`[data-row="${row}"][data-col="${col}"]`);
-    if (!cellElement) return;
-
-    const rect = cellElement.getBoundingClientRect();
-    const boardRect = boardElement.getBoundingClientRect();
-
-    const centerX = rect.left + rect.width / 2 - boardRect.left;
-    const centerY = rect.top + rect.height / 2 - boardRect.top;
-
-    for (let i = 0; i < 20; i++) {
-        const particle = document.createElement("div");
-        particle.classList.add("particle");
-        const size = Math.random() * 8 + 4; 
-        particle.style.width = `${size}px`;
-        particle.style.height = `${size}px`;
-        particle.style.left = `${centerX - size / 2}px`;
-        particle.style.top = `${centerY - size / 2}px`;
-
-        const angle = Math.random() * Math.PI * 2;
-        const distance = Math.random() * 50 + 20; 
-        const dx = Math.cos(angle) * distance;
-        const dy = Math.sin(angle) * distance;
-
-        particle.style.setProperty('--dx', `${dx}px`);
-        particle.style.setProperty('--dy', `${dy}px`);
-        particle.style.animationDuration = `${Math.random() * 0.5 + 0.5}s`; 
-
-        particleContainer.appendChild(particle);
-
-        particle.addEventListener('animationend', () => {
-            particle.remove();
-        });
-    }
-}
-
-function playMoveSound() {
-    if (isSoundOn) {
-        moveAudio.currentTime = 0;
-        moveAudio.play().catch(e => console.log("Move sound play failed:", e));
-    }
-}
-
-function playCaptureSound(row, col) {
-    if (isSoundOn) {
-        captureAudio.currentTime = 0;
-        captureAudio.play().catch(e => console.log("Capture sound play failed:", e));
-    }
-    explodeParticles(row, col);
-}
-
-function playBackgroundMusic() {
-    if (isMusicOn) {
-        backgroundMusic.play().catch(e => console.log("Music play failed:", e));
-    } else {
-        backgroundMusic.pause();
-    }
-}
-
-function toggleMusic() {
-    isMusicOn = !isMusicOn;
-    if (isMusicOn) {
-        musicToggleBtn.textContent = "🎵 Música: ON";
-        playBackgroundMusic();
-    } else {
-        musicToggleBtn.textContent = "🔇 Música: OFF";
-        backgroundMusic.pause();
-    }
-    localStorage.setItem(MUSIC_STORAGE_KEY, isMusicOn);
-}
-
-function toggleSound() {
-    isSoundOn = !isSoundOn;
-    if (isSoundOn) {
-        soundToggleBtn.textContent = "🔊 Sons: ON";
-    } else {
-        soundToggleBtn.textContent = "🔕 Sons: OFF";
-    }
-    localStorage.setItem(SOUND_STORAGE_KEY, isSoundOn);
-}
-
-function loadMusicState() {
-    const savedState = localStorage.getItem(MUSIC_STORAGE_KEY);
-    if (savedState !== null) {
-        isMusicOn = JSON.parse(savedState);
-    }
-    musicToggleBtn.textContent = isMusicOn ? "🎵 Música: ON" : "🔇 Música: OFF";
-}
-
-function loadSoundState() {
-    const savedState = localStorage.getItem(SOUND_STORAGE_KEY);
-    if (savedState !== null) {
-        isSoundOn = JSON.parse(savedState);
-    }
-    soundToggleBtn.textContent = isSoundOn ? "🔊 Sons: ON" : "🔕 Sons: OFF";
-}
-
-// --- Lógica do Novo Menu ---
-menuToggle.addEventListener("click", () => {
-    menuContainer.classList.toggle("menu-open");
-});
-
-// --- Lógica de Música do Google Drive ---
-loadDriveBtn.addEventListener("click", () => {
-    let url = driveInput.value.trim();
-    if (!url) {
-        alert("Cole um link do Google Drive.");
-        return;
-    }
-
-    const match = url.match(/\/d\/(.*?)\//);
-    if (!match) {
-        alert("Link inválido. Copie o link completo de compartilhamento (com a seção /d/).");
-        return;
-    }
-
-    const fileId = match[1];
-    const directUrl = `https://drive.google.com/uc?export=download&id=${fileId}`;
-
-    backgroundMusic.src = directUrl;
-    backgroundMusic.play().then(() => {
-        isMusicOn = true;
-        musicToggleBtn.textContent = "🎵 Música: ON";
-        localStorage.setItem(MUSIC_STORAGE_KEY, isMusicOn);
-    }).catch(err => {
-        console.error("Erro ao tocar do Drive:", err);
-        alert("Erro ao reproduzir. O link pode estar privado ou o formato não é suportado pelo navegador.");
-    });
-});
-
-// --- Initialization ---
-document.addEventListener("DOMContentLoaded", () => {
-    loadScore();
-    loadGame();
-    loadMusicState();
-    loadSoundState();
-    renderBoard();
-    playBackgroundMusic(); 
-});
-
-musicToggleBtn.addEventListener("click", toggleMusic);
-soundToggleBtn.addEventListener("click", toggleSound);
