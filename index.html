@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR"><head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOABE PLAY DAMAS PRO</title>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="game-container">
+        <header class="game-header">
+            <h1>JOABE PLAY DAMAS come mulher boa</h1>
+            <div class="controls-top">
+                <button id="undoBtn" class="control-btn">↩ Desfazer</button>
+                <div class="score-display">
+                    <span class="player-score">VOCÊ: <span id="playerScore">0</span></span>
+                    <span class="ai-score">IA: <span id="aiScore">0</span></span>
+                </div>
+                <div class="difficulty-selector">
+                    <label for="difficulty">Dificuldade:</label>
+                    <select id="difficulty" class="control-select">
+                        <option value="easy">Fácil</option>
+                        <option value="medium">Médio</option>
+                        <option value="hard">Difícil</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <main class="game-main">
+            <div class="board-wrapper">
+                <div id="board" class="board"><div class="cell light" data-row="0" data-col="0"></div><div class="cell dark" data-row="0" data-col="1"></div><div class="cell light" data-row="0" data-col="2"></div><div class="cell dark" data-row="0" data-col="3"></div><div class="cell light" data-row="0" data-col="4"></div><div class="cell dark" data-row="0" data-col="5"><div class="piece ai"></div></div><div class="cell light" data-row="0" data-col="6"></div><div class="cell dark" data-row="0" data-col="7"><div class="piece ai"></div></div><div class="cell dark" data-row="1" data-col="0"><div class="piece ai"></div></div><div class="cell light" data-row="1" data-col="1"></div><div class="cell dark" data-row="1" data-col="2"><div class="piece ai"></div></div><div class="cell light" data-row="1" data-col="3"></div><div class="cell dark" data-row="1" data-col="4"><div class="piece ai"></div></div><div class="cell light" data-row="1" data-col="5"></div><div class="cell dark" data-row="1" data-col="6"><div class="piece ai"></div></div><div class="cell light" data-row="1" data-col="7"></div><div class="cell light" data-row="2" data-col="0"></div><div class="cell dark" data-row="2" data-col="1"><div class="piece ai"></div></div><div class="cell light" data-row="2" data-col="2"></div><div class="cell dark" data-row="2" data-col="3"><div class="piece ai"></div></div><div class="cell light" data-row="2" data-col="4"></div><div class="cell dark" data-row="2" data-col="5"></div><div class="cell light" data-row="2" data-col="6"></div><div class="cell dark" data-row="2" data-col="7"><div class="piece player selected"></div></div><div class="cell dark" data-row="3" data-col="0"><div class="piece ai"></div></div><div class="cell light" data-row="3" data-col="1"></div><div class="cell dark" data-row="3" data-col="2"><div class="piece ai"></div></div><div class="cell light" data-row="3" data-col="3"></div><div class="cell dark" data-row="3" data-col="4"></div><div class="cell light" data-row="3" data-col="5"></div><div class="cell dark" data-row="3" data-col="6"></div><div class="cell light" data-row="3" data-col="7"></div><div class="cell light" data-row="4" data-col="0"></div><div class="cell dark" data-row="4" data-col="1"></div><div class="cell light" data-row="4" data-col="2"></div><div class="cell dark" data-row="4" data-col="3"></div><div class="cell light" data-row="4" data-col="4"></div><div class="cell dark" data-row="4" data-col="5"></div><div class="cell light" data-row="4" data-col="6"></div><div class="cell dark" data-row="4" data-col="7"></div><div class="cell dark" data-row="5" data-col="0"><div class="piece player"></div></div><div class="cell light" data-row="5" data-col="1"></div><div class="cell dark" data-row="5" data-col="2"></div><div class="cell light" data-row="5" data-col="3"></div><div class="cell dark" data-row="5" data-col="4"></div><div class="cell light" data-row="5" data-col="5"></div><div class="cell dark" data-row="5" data-col="6"></div><div class="cell light" data-row="5" data-col="7"></div><div class="cell light" data-row="6" data-col="0"></div><div class="cell dark" data-row="6" data-col="1"><div class="piece player"></div></div><div class="cell light" data-row="6" data-col="2"></div><div class="cell dark" data-row="6" data-col="3"></div><div class="cell light" data-row="6" data-col="4"></div><div class="cell dark" data-row="6" data-col="5"></div><div class="cell light" data-row="6" data-col="6"></div><div class="cell dark" data-row="6" data-col="7"><div class="piece player"></div></div><div class="cell dark" data-row="7" data-col="0"><div class="piece player"></div></div><div class="cell light" data-row="7" data-col="1"></div><div class="cell dark" data-row="7" data-col="2"><div class="piece player"></div></div><div class="cell light" data-row="7" data-col="3"></div><div class="cell dark" data-row="7" data-col="4"><div class="piece player"></div></div><div class="cell light" data-row="7" data-col="5"></div><div class="cell dark" data-row="7" data-col="6"><div class="piece player"></div></div><div class="cell light" data-row="7" data-col="7"></div></div>
+                <div id="particleContainer" class="particle-container"></div>
+            </div>
+            <div class="game-info">
+                <p id="statusText" class="status-text">Sua vez</p>
+                <div class="controls-bottom">
+                    <button id="musicToggleBtn" class="control-btn" >🔇 Música: OFF</button>
+                    <button id="soundToggleBtn" class="control-btn" >🔕 Sons: OFF</button>
+                </div>
+            </div>
+        </main>
+
+        <div id="victoryScreen" class="victory-screen hidden">
+            <h2 id="victoryTitle" class="victory-title"></h2>
+            <p id="victoryText" class="victory-text"></p>
+            <button id="playAgainBtn" class="play-again-btn">Jogar Novamente</button>
+        </div>
+    </div>
+
+    
+
+<script src="script.js"></script>
+</body></html>
