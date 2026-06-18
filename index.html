@@ -1,66 +1,215 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JOABE PLAY DAMAS PRO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Roboto:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
-</head>
+<html lang="pt-BR"><head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pulse Music Ultra GOD MODE</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&amp;display=swap">
+
+  <link rel="stylesheet" href="style.css">
+<style id="__omega_editor_style__\">[data-omega-editable]:hover{outline:2px solid #7c3aed!important;outline-offset:2px;cursor:text!important}[data-omega-editable]:focus{outline:2px solid #22c55e!important;outline-offset:2px}</style></head>
 <body>
-    <div class="game-container">
-        <header class="game-header">
-            <h1>JOABE PLAY DAMAS come mulher boa</h1>
-            <div class="score-display" style="justify-content: center; margin-bottom: 15px;">
-                <span class="player-score">VOCÊ: <span id="playerScore">0</span></span>
-                <span class="ai-score">IA: <span id="aiScore">0</span></span>
+
+  <canvas id="particleCanvas" width="1243" height="600"></canvas>
+
+  <div class="background-glow"></div>
+
+  <div class="app-container">
+
+    <aside class="sidebar">
+
+      <div class="logo">
+        <span contenteditable="true" data-omega-editable="true" data-orig="PULSE">joabe play gostoso</span>
+      </div>
+
+      <nav>
+        <button onclick="goHome()" class="active" data-view="home" contenteditable="true" data-omega-editable="true">
+          🏠 Home
+        </button>
+        <button onclick="openSearch()" data-view="search" class="" contenteditable="true" data-omega-editable="true">
+          🔍 Search
+        </button>
+        <button onclick="openLibrary()" data-view="library" class="" contenteditable="true" data-omega-editable="true">
+          📚 Library
+        </button>
+        <button onclick="openFavorites()" data-view="favorites" class="" contenteditable="true" data-omega-editable="true">
+          ❤️ Favorites
+        </button>
+        <button onclick="openProfile()" data-view="profile" class="" contenteditable="true" data-omega-editable="true">
+          👤 Profile
+        </button>
+        <button onclick="openUploader()" contenteditable="true" data-omega-editable="true">
+          ☁ Importar Música
+        </button>
+      </nav>
+
+      <div class="playlist-box">
+        <h3 contenteditable="true" data-omega-editable="true">Playlists</h3>
+        <ul id="playlist-list">
+          </ul>
+      </div>
+
+    </aside>
+
+    <main class="main">
+      <header>
+        <input id="searchInput" type="text" placeholder="Search music, artist..." onkeyup="searchMusic()">
+      </header>
+
+      <div id="main-content-wrapper">
+        <section id="home-view" class="view-section active">
+          <div class="hero">
+            <div class="hero-left">
+              <h1 contenteditable="true" data-omega-editable="true">Pulse Music Ultra</h1>
+              <p contenteditable="true" data-omega-editable="true">Streaming premium futuristic experience</p>
+              <button onclick="togglePlay()" contenteditable="true" data-omega-editable="true">
+                Start Listening
+              </button>
             </div>
+          </div>
 
-            <button id="menuToggle" class="control-btn">☰ Menu</button>
-
-            <div id="menuContainer">
-                <div class="controls-top" style="justify-content: center;">
-                    <button id="undoBtn" class="control-btn">↩ Desfazer</button>
-                    <div class="difficulty-selector">
-                        <label for="difficulty">Dificuldade:</label>
-                        <select id="difficulty" class="control-select">
-                            <option value="easy">Fácil</option>
-                            <option value="medium">Médio</option>
-                            <option value="hard">Difícil</option>
-                        </select>
-                    </div>
-                </div>
-
-                <div class="controls-bottom">
-                    <button id="musicToggleBtn" class="control-btn">🔇 Música: OFF</button>
-                    <button id="soundToggleBtn" class="control-btn">🔕 Sons: OFF</button>
-                </div>
-
-                <div class="drive-music-panel">
-                    <h3 style="margin: 0; font-size: 1rem;">🎵 Música do Google Drive</h3>
-                    <input type="text" id="driveUrl" placeholder="Cole aqui o link do Google Drive">
-                    <button id="loadDriveMusic" class="control-btn">Carregar Música</button>
-                </div>
+          <div class="albums">
+            <div class="card" onclick="loadSong(0)">
+              <img src="https://picsum.photos/id/1040/200/200" alt="Album Cover">
+              <h4 contenteditable="true" data-omega-editable="true">Neon Dreams</h4>
+              <p contenteditable="true" data-omega-editable="true">Cyber Synthwave</p>
             </div>
-        </header>
-
-        <main class="game-main">
-            <div class="board-wrapper">
-                <div id="board" class="board"></div>
-                <div id="particleContainer" class="particle-container"></div>
+            <div class="card" onclick="loadSong(1)">
+              <img src="https://picsum.photos/id/1041/200/200" alt="Album Cover">
+              <h4 contenteditable="true" data-omega-editable="true">Future Bass</h4>
+              <p contenteditable="true" data-omega-editable="true">Electronic Bass</p>
             </div>
-            <div class="game-info">
-                <p id="statusText" class="status-text">Sua vez</p>
+            <div class="card" onclick="loadSong(2)">
+              <img src="https://picsum.photos/id/1042/200/200" alt="Album Cover">
+              <h4 contenteditable="true" data-omega-editable="true">Night Cyber</h4>
+              <p contenteditable="true" data-omega-editable="true">Digital Beats</p>
             </div>
-        </main>
+            <div class="card" onclick="loadSong(3)">
+              <img src="https://picsum.photos/id/1043/200/200" alt="Album Cover">
+              <h4 contenteditable="true" data-omega-editable="true">Deep Space</h4>
+              <p contenteditable="true" data-omega-editable="true">Ambient Future</p>
+            </div>
+            <div class="card" onclick="loadSong(4)">
+              <img src="https://picsum.photos/id/1044/200/200" alt="Album Cover">
+              <h4 contenteditable="true" data-omega-editable="true">Electric Pulse</h4>
+              <p contenteditable="true" data-omega-editable="true">Electro Pop</p>
+            </div>
+            <div class="card" onclick="loadSong(5)">
+              <img src="https://picsum.photos/id/1045/200/200" alt="Album Cover">
+              <h4 contenteditable="true" data-omega-editable="true">Starlight Drive</h4>
+              <p contenteditable="true" data-omega-editable="true">Cosmic Chill</p>
+            </div>
+            <div class="card" onclick="loadSong(6)">
+              <img src="https://picsum.photos/id/1046/200/200" alt="Album Cover">
+              <h4 contenteditable="true" data-omega-editable="true">Cybernetic Heart</h4>
+              <p contenteditable="true" data-omega-editable="true">Robotic Funk</p>
+            </div>
+            <div class="card" onclick="loadSong(7)">
+              <img src="https://picsum.photos/id/1047/200/200" alt="Album Cover">
+              <h4 contenteditable="true" data-omega-editable="true">Quantum Leap</h4>
+              <p contenteditable="true" data-omega-editable="true">Future Trance</p>
+            </div>
+          </div>
+        </section>
 
-        <div id="victoryScreen" class="victory-screen hidden">
-            <h2 id="victoryTitle" class="victory-title"></h2>
-            <p id="victoryText" class="victory-text"></p>
-            <button id="playAgainBtn" class="play-again-btn">Jogar Novamente</button>
-        </div>
+        <section id="search-view" class="view-section">
+          <h2 contenteditable="true" data-omega-editable="true">Search Results</h2>
+          <div id="search-results-container" class="search-results"><p class="empty-state" contenteditable="true" data-omega-editable="true">Start typing in the search bar to find music.</p></div>
+        </section>
+
+        <section id="library-view" class="view-section">
+          <h2 contenteditable="true" data-omega-editable="true">Your Library</h2>
+          <div id="library-list-container" class="library-list">
+            </div>
+        </section>
+
+        <section id="favorites-view" class="view-section">
+          <h2 contenteditable="true" data-omega-editable="true">Your Favorites</h2>
+          <div id="favorites-list-container" class="favorites-list"><p class="empty-state" contenteditable="true" data-omega-editable="true">No favorite songs yet. Click the ❤️ button on the player to add some!</p></div>
+        </section>
+
+        <section id="profile-view" class="view-section">
+          <h2 contenteditable="true" data-omega-editable="true">Profile Settings</h2>
+          <div class="profile-content">
+            <p contenteditable="true" data-omega-editable="true">Welcome to your Pulse Music Ultra profile!</p>
+            <p contenteditable="true" data-omega-editable="true">Here you can manage your account settings, preferences, and more.</p>
+            <p contenteditable="true" data-omega-editable="true">Stay tuned for more features coming soon!</p>
+          </div>
+        </section>
+      </div>
+    </main>
+  </div>
+
+  <footer class="player">
+    <div class="song-info playing">
+      <img id="cover" src="https://picsum.photos/id/1043/200/200" alt="Album Cover">
+      <div>
+        <h4 id="title" contenteditable="true" data-omega-editable="true">Deep Space</h4>
+        <p id="artist" contenteditable="true" data-omega-editable="true">Cosmic Echoes</p>
+      </div>
     </div>
 
-    <script src="script.js"></script>
-</body>
-</html>
+    <div class="controls">
+      <button onclick="prevSong()" contenteditable="true" data-omega-editable="true">⏮</button>
+      <button id="playBtn" onclick="togglePlay()" contenteditable="true" data-omega-editable="true">⏸</button>
+      <button onclick="nextSong()" contenteditable="true" data-omega-editable="true">⏭</button>
+      <button id="shuffleBtn" onclick="toggleShuffle()" contenteditable="true" data-omega-editable="true">🔀</button>
+      <button id="repeatBtn" onclick="toggleRepeat()" contenteditable="true" data-omega-editable="true">🔁</button>
+    </div>
+
+    <div class="progress-area">
+      <input type="range" id="progress" min="0" max="100" value="0">
+    </div>
+
+    <div class="volume">
+      🔊
+      <input id="volume" type="range" min="0" max="1" step="0.1" value="0.7">
+    </div>
+
+    <div class="extra-controls">
+      <button id="favoriteBtn" onclick="toggleFavorite()" contenteditable="true" data-omega-editable="true">
+        ❤️
+      </button>
+      <button onclick="openFullscreenPlayer()" contenteditable="true" data-omega-editable="true">
+        ⛶
+      </button>
+    </div>
+
+    <audio id="audio" src="assets/audio/song4.mp3"></audio>
+  </footer>
+
+  <canvas id="equalizerCanvas" width="180" height="60"></canvas>
+
+  <div id="uploadModal" class="upload-modal">
+    <div class="upload-box">
+      <h2>Adicionar Música</h2>
+      <input type="text" id="musicTitle" placeholder="Nome da música">
+      <input type="text" id="musicArtist" placeholder="Nome do artista">
+      
+      <label>Escolher Música (MP3)</label>
+      <div class="upload-row">
+        <input type="file" id="musicFile" accept="audio/*">
+        <button type="button" class="drive-btn" onclick="pickFromDrive('audio')">▲ Drive</button>
+      </div>
+      <span id="driveMusicStatus" class="drive-status-text"></span>
+      
+      <label>Escolher Capa (Imagem)</label>
+      <div class="upload-row">
+        <input type="file" id="coverFile" accept="image/*">
+        <button type="button" class="drive-btn" onclick="pickFromDrive('image')">▲ Drive</button>
+      </div>
+      <span id="driveCoverStatus" class="drive-status-text"></span>
+      
+      <div class="upload-actions">
+        <button onclick="saveUploadedSong()">Salvar</button>
+        <button onclick="closeUploader()">Fechar</button>
+      </div>
+    </div>
+  </div>
+
+  <script async defer src="https://apis.google.com/js/api.js"></script>
+  <script async defer src="https://accounts.google.com/gsi/client"></script>
+
+  <script src="script.js"></script>
+</body></html>
