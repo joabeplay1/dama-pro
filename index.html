@@ -1,277 +1,301 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>JESUS REINA AI V3 ULTRA ENGINE</title>
-
-<link rel="stylesheet" href="style.css">
-
-<!-- ICONS -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-
-<style>
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap');
-</style>
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JESUS REINA AI V3 — ULTIMATE ENGINE</title>
+    
+    <!-- Fontes Premium: Orbitron para Sci-Fi e Inter para UI limpa -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Orbitron:wght@400;600;800;900&display=swap" rel="stylesheet">
+    
+    <!-- Ícones de Alta Tecnologia (FontAwesome ou Remix Icons via CDN) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <!-- Estilo Base -->
+    <link rel="stylesheet" href="style.css">
 </head>
+<body class="ultra-futurista">
 
-<body>
+    <!-- LAYER 0: Canvas de Partículas Interativas -->
+    <canvas id="particles-canvas"></canvas>
 
-<!-- PARTICLES -->
-<canvas id="particlesCanvas"></canvas>
-
-<!-- FLOATING TEXT BACKGROUND -->
-<div id="floatingTextContainer"></div>
-
-<!-- SPLASH SCREEN -->
-<div id="splashScreen">
-
-    <div class="splash-overlay"></div>
-
-    <div class="splash-content">
-
-        <h1 class="main-logo">
-            JESUS REINA AI
-        </h1>
-
-        <p class="version-text">
-            ULTRA ENGINE V3
-        </p>
-
-        <div class="feature-cards">
-
-            <div class="feature-card">
-                ⚡ PROMPTS EXTREMOS
-            </div>
-
-            <div class="feature-card">
-                🧠 IA MELHORA APLICATIVOS
-            </div>
-
-            <div class="feature-card">
-                📱 CRIADOR DE APPS
-            </div>
-
-            <div class="feature-card">
-                🎨 EDITOR VISUAL
-            </div>
-
-            <div class="feature-card">
-                🎵 GOOGLE DRIVE AUDIO
-            </div>
-
-            <div class="feature-card">
-                👑 IA PROGRAMADOR SENIOR
-            </div>
-
-        </div>
-
-        <button id="enterSystemBtn">
-            ENTRAR NO SISTEMA
-        </button>
-
+    <!-- LAYER 1: Textos Animados Subindo Infinitamente no Fundo -->
+    <div class="bg-infinite-text-container">
+        <div class="bg-text-stream">JESUS REINA • JESUS TE AMA • JESUS É FIEL • DEUS É BOM • </div>
+        <div class="bg-text-stream">JESUS REINA • JESUS TE AMA • JESUS É FIEL • DEUS É BOM • </div>
     </div>
 
-</div>
+    <!-- ======================================================== -->
+    <!-- TELA DE ENTRADA CINEMÁTICA (SPLASH SCREEN)               -->
+    <!-- ======================================================== -->
+    <div id="splash-screen" class="splash-overlay">
+        <div class="splash-content glass-card">
+            <div class="neon-glow-pulse"></div>
+            <h1 class="splash-title">JESUS REINA AI</h1>
+            <h2 class="splash-subtitle">ULTIMATE ENGINE V3</h2>
+            
+            <!-- Cards de Apresentação de Recursos -->
+            <div class="splash-features-grid">
+                <div class="feature-mini-card"><span class="icon">⚡</span> GERAL DE PROMPTS EXTREMOS</div>
+                <div class="feature-mini-card"><span class="icon">🧠</span> IA QUE MELHORA APLICATIVOS</div>
+                <div class="feature-mini-card"><span class="icon">📱</span> CRIAÇÃO AUTOMÁTICA DE APPS</div>
+                <div class="feature-mini-card"><span class="icon">🎨</span> EDITOR VISUAL AVANÇADO</div>
+                <div class="feature-mini-card"><span class="icon">🎵</span> MÚSICA VIA GOOGLE DRIVE</div>
+                <div class="feature-mini-card"><span class="icon">👑</span> PROGRAMADOR SENIOR IA</div>
+                <div class="feature-mini-card"><span class="icon">⚙</span> GERAÇÃO DE CÓDIGO PROFISSIONAL</div>
+            </div>
 
-<!-- MAIN APP -->
-<div id="appContainer" class="hidden">
-
-    <!-- SIDEBAR -->
-    <aside class="sidebar">
-
-        <div class="sidebar-logo">
-            JESUS REINA AI
+            <button id="btn-enter-system" class="btn-premium-neon">
+                <span class="btn-blur-effect"></span>
+                [ ENTRAR NO SISTEMA ]
+            </button>
         </div>
+    </div>
 
-        <nav class="menu">
-
-            <button class="menu-btn active" data-mode="chat">
-                💬 CHAT IA
-            </button>
-
-            <button class="menu-btn" data-mode="prompt">
-                🧠 GERAR PROMPT PRO
-            </button>
-
-            <button class="menu-btn" data-mode="code">
-                ⚡ GERAR CÓDIGO PRO
-            </button>
-
-            <button class="menu-btn" data-mode="app">
-                📱 CRIAR APLICATIVO
-            </button>
-
-            <button class="menu-btn" data-mode="improve">
-                🛠 MELHORAR APP IA
-            </button>
-
-            <button class="menu-btn" data-mode="editor">
-                🎨 EDITOR VISUAL
-            </button>
-
-            <button class="menu-btn" data-mode="audio">
-                🎵 ÁUDIO GOOGLE DRIVE
-            </button>
-
-            <button class="menu-btn" data-mode="senior">
-                👑 PROGRAMADOR SENIOR
-            </button>
-
-            <button class="menu-btn" data-mode="config">
-                ⚙ CONFIG
-            </button>
-
-            <button class="menu-btn" data-mode="export">
-                📦 EXPORTAR
-            </button>
-
-        </nav>
-
-    </aside>
-
-    <!-- MAIN -->
-    <main class="main-panel">
-
-        <header class="top-bar">
-
-            <div id="modeTitle">
-                CHAT IA
+    <!-- ======================================================== -->
+    <!-- DASHBOARD PRINCIPAL (SISTEMA ULTRA ENGINE)                -->
+    <!-- ======================================================== -->
+    <div id="main-app-container" class="app-hidden">
+        
+        <!-- SIDEBAR / CARDÁPIO PRINCIPAL -->
+        <aside class="sidebar-menu glass-card">
+            <div class="brand-zone">
+                <span class="brand-logo">⚡</span>
+                <span class="brand-name">JR AI V3</span>
             </div>
+            
+            <nav class="menu-nav">
+                <button class="nav-item active" data-target="chat-ia"><i class="fa-solid fa-comments"></i> CHAT IA</button>
+                <button class="nav-item" data-target="prompt-pro"><i class="fa-solid fa-brain"></i> GERAR PROMPT PRO</button>
+                <button class="nav-item" data-target="code-pro"><i class="fa-solid fa-code"></i> GERAR CÓDIGO PRO</button>
+                <button class="nav-item" data-target="create-app"><i class="fa-solid fa-mobile-screen-button"></i> CRIAR APLICATIVO</button>
+                <button class="nav-item" data-target="improve-app"><i class="fa-solid fa-screwdriver-wrench"></i> MELHORAR APP IA</button>
+                <button class="nav-item" data-target="visual-editor"><i class="fa-solid fa-palette"></i> EDITOR VISUAL</button>
+                <button class="nav-item" data-target="audio-drive"><i class="fa-solid fa-music"></i> ÁUDIO GOOGLE DRIVE</button>
+                <button class="nav-item" data-target="senior-dev"><i class="fa-solid fa-crown"></i> PROGRAMADOR SENIOR</button>
+                <button class="nav-item" data-target="settings"><i class="fa-solid fa-gear"></i> CONFIGURAÇÕES</button>
+            </nav>
 
-            <div class="status-box">
-                ● ONLINE
+            <div class="sidebar-footer">
+                <button id="btn-export" class="btn-action-export"><i class="fa-solid fa-box-open"></i> EXPORTAR PROJETO</button>
             </div>
+        </aside>
 
-        </header>
-
-        <!-- DYNAMIC AREA -->
-        <section id="workspace">
-
-            <!-- CHAT AREA -->
-            <div id="chatArea">
-
-                <div class="message bot">
-                    JESUS REINA AI iniciado...
+        <!-- WORKSPACE PRINCIPAL (MUDANÇA DINÂMICA VIA ROUTER.JS) -->
+        <main class="workspace-viewport">
+            
+            <!-- SECTION 1: CHAT IA -->
+            <section id="chat-ia" class="workspace-section view-active">
+                <div class="section-header">
+                    <h2>💬 CHAT IA INTERATIVO</h2>
+                    <p>Comunicação direta com o núcleo computacional da Engine V3.</p>
                 </div>
-
-            </div>
-
-            <!-- PREVIEW ENGINE -->
-            <div id="previewPanel">
-
-                <div class="preview-header">
-                    LIVE PREVIEW
+                <div class="chat-container glass-card">
+                    <div id="chat-output" class="chat-messages"></div>
+                    <div class="chat-input-row">
+                        <input type="text" id="chat-input-field" placeholder="Digite comandos ou requisições complexas...">
+                        <button id="btn-send-chat" class="btn-neon-icon"><i class="fa-solid fa-paper-plane"></i></button>
+                    </div>
                 </div>
+            </section>
 
-                <iframe id="appPreview"></iframe>
+            <!-- SECTION 2: GERADOR DE PROMPTS EXTREMO V2 -->
+            <section id="prompt-pro" class="workspace-section">
+                <div class="section-header">
+                    <h2>🧠 GERADOR DE PROMPTS V2 EXTREMO</h2>
+                    <p>O motor expande instantaneamente arquiteturas completas de sites, apps, saas, dashboards e mais.</p>
+                </div>
+                <div class="engine-card glass-card">
+                    <div class="input-group">
+                        <label for="prompt-category">Selecione o Escopo de Detecção:</label>
+                        <select id="prompt-category" class="premium-select">
+                            <option value="site">Site Institucional / Landing Page</option>
+                            <option value="app">Mobile Application</option>
+                            <option value="game">Game Engine Architecture</option>
+                            <option value="loja">E-commerce / Storefront</option>
+                            <option value="saas">SaaS Core System</option>
+                            <option value="ia">AI Agent / LLM Integration</option>
+                            <option value="dashboard">Data Analytics Dashboard</option>
+                            <option value="delivery">On-Demand Delivery System</option>
+                            <option value="chatbot">Conversational Chatbot Flow</option>
+                            <option value="rede-social">Social Media Network</option>
+                            <option value="automacao">Automation / Workflow Tool</option>
+                            <option value="editor">Visual Editor / Creation Studio</option>
+                            <option value="streaming">Media Streaming Platform</option>
+                        </select>
+                    </div>
+                    <textarea id="prompt-input-base" placeholder="Descreva brevemente sua ideia básica aqui..."></textarea>
+                    <button id="btn-generate-prompt" class="btn-premium-neon">EXPANDIR PARA PROMPT EXTREMO</button>
+                    <div class="output-zone">
+                        <div class="zone-header"><span>PROMPT EXPANDIDO PROFISSIONAL</span><button class="btn-copy"><i class="fa-solid fa-copy"></i></button></div>
+                        <pre><code id="prompt-output-code">// O prompt gerado pelo motor interno aparecerá aqui...</code></pre>
+                    </div>
+                </div>
+            </section>
 
-            </div>
+            <!-- SECTION 3: GERADOR DE CÓDIGO PRO -->
+            <section id="code-pro" class="workspace-section">
+                <div class="section-header">
+                    <h2>⚡ GERAR CÓDIGO PRO</h2>
+                    <p>Geração imediata com injeção automática de backend, animações, responsividade e arquitetura modular.</p>
+                </div>
+                <div class="engine-card glass-card">
+                    <input type="text" id="code-prompt-input" placeholder="Ex: crie app delivery com mapa e checkout...">
+                    <button id="btn-generate-code" class="btn-premium-neon">INJETAR E GERAR CÓDIGO LIMPO</button>
+                    <div class="output-zone">
+                        <div class="zone-header"><span>CÓDIGO GERADO (PRONTO PARA PRODUÇÃO)</span><button class="btn-copy"><i class="fa-solid fa-copy"></i></button></div>
+                        <pre><code id="code-output-display">// Arquitetura modular limpa...</code></pre>
+                    </div>
+                </div>
+            </section>
 
-        </section>
+            <!-- SECTION 4: NOVO BOTÃO — CRIE APLICATIVO -->
+            <section id="create-app" class="workspace-section">
+                <div class="section-header">
+                    <h2>📱 CRIAÇÃO AUTOMÁTICA DE APPS</h2>
+                    <p>Digite o que quer clonar ou criar. A IA mapeará e gerará a estrutura inteira sem placeholders.</p>
+                </div>
+                <div class="engine-card glass-card">
+                    <input type="text" id="app-factory-input" placeholder="Ex: Quero um clone da Netflix...">
+                    <button id="btn-factory-build" class="btn-premium-neon">START AUTOMATIC ENGINE BUILD</button>
+                    
+                    <!-- Live Build Log Tracker -->
+                    <div class="build-log-container">
+                        <div class="log-title">Construindo Módulos em Tempo Real:</div>
+                        <ul id="build-steps-log">
+                            <!-- Injetado dinamicamente via JS -->
+                        </ul>
+                    </div>
+                </div>
+            </section>
 
-        <!-- VISUAL EDITOR -->
-        <section id="visualEditor" class="hidden">
+            <!-- SECTION 5: MELHORAR APP COM IA -->
+            <section id="improve-app" class="workspace-section">
+                <div class="section-header">
+                    <h2>🛠 MELHORAR APP COM IA</h2>
+                    <p>Cole o código bruto (HTML/CSS/JS). A IA otimiza o design, UX, performance, segurança e clean code.</p>
+                </div>
+                <div class="engine-card glass-card">
+                    <textarea id="improve-code-input" placeholder="Cole seu código aqui para refatoração futurista extrema..."></textarea>
+                    <button id="btn-optimize-app" class="btn-premium-neon">ANALISAR E OTIMIZAR PRO</button>
+                    <div class="output-zone">
+                        <div class="zone-header"><span>CÓDIGO EXTREMAMENTE MELHORADO</span><button class="btn-copy"><i class="fa-solid fa-copy"></i></button></div>
+                        <pre><code id="improve-output-display">// Código otimizado aparecerá aqui...</code></pre>
+                    </div>
+                </div>
+            </section>
 
-            <div class="editor-toolbar">
+            <!-- SECTION 6: EDITOR VISUAL (MUITO FORTE) -->
+            <section id="visual-editor" class="workspace-section">
+                <div class="section-header">
+                    <h2>🎨 EDITOR VISUAL AVANÇADO (PREVIEW INTERATIVO)</h2>
+                    <p>Clique em elementos, altere banners, arraste, redimensione e edite em tempo real com motor drag-and-drop.</p>
+                </div>
+                
+                <div class="editor-workspace-split">
+                    <!-- Painel de Controle Lateral do Editor -->
+                    <div class="editor-sidebar glass-card">
+                        <h3>Componentes</h3>
+                        <div class="draggable-palette">
+                            <div class="palette-item" data-type="banner"><i class="fa-solid fa-image"></i> Banner</div>
+                            <div class="palette-item" data-type="titulo"><i class="fa-solid fa-heading"></i> Título</div>
+                            <div class="palette-item" data-type="botao"><i class="fa-solid fa-square"></i> Botão</div>
+                            <div class="palette-item" data-type="cards"><i class="fa-solid fa-grip"></i> Cards</div>
+                            <div class="palette-item" data-type="textos"><i class="fa-solid fa-font"></i> Bloco de Texto</div>
+                        </div>
+                        <hr class="editor-divider">
+                        <h3>Propriedades</h3>
+                        <div id="element-properties-panel">
+                            <p class="empty-notice">Selecione um elemento na tela para editar suas propriedades.</p>
+                        </div>
+                    </div>
 
-                <button id="editTextBtn">
-                    EDITAR TEXTO
-                </button>
+                    <!-- Visual Viewport Simulator -->
+                    <div class="editor-preview-frame glass-card">
+                        <div class="viewport-header">
+                            <span class="view-dot red"></span><span class="view-dot yellow"></span><span class="view-dot green"></span>
+                            <span class="view-url">sandbox://jesus-reina-engine-v3-preview</span>
+                        </div>
+                        <!-- Canvas Real do Sandbox onde o App Gerado roda e aceita Drag/Drop e Resizing -->
+                        <div id="sandbox-live-render" class="sandbox-container">
+                            <!-- Os apps criados renderizam aqui dentro sem fundo sólido, com glassmorphism e partículas nativas -->
+                        </div>
+                    </div>
+                </div>
+            </section>
 
-                <button id="editImageBtn">
-                    TROCAR BANNER
-                </button>
+            <!-- SECTION 7: ÁUDIO GOOGLE DRIVE -->
+            <section id="audio-drive" class="workspace-section">
+                <div class="section-header">
+                    <h2>🎵 ÁUDIO GOOGLE DRIVE</h2>
+                    <p>Cole o link de compartilhamento de áudio do Drive para convertê-lo e injetá-lo em loop contínuo no app gerado.</p>
+                </div>
+                <div class="engine-card glass-card">
+                    <input type="text" id="audio-drive-url" placeholder="https://drive.google.com/file/d/.../view?usp=sharing">
+                    <button id="btn-convert-audio" class="btn-premium-neon">CONVERTER E TOCAR NO APP</button>
+                    
+                    <div class="audio-status-box">
+                        <p id="audio-track-info">Nenhuma faixa vinculada no momento.</p>
+                        <div id="audio-player-host"></div>
+                    </div>
+                </div>
+            </section>
 
-                <button id="dragModeBtn">
-                    ARRASTAR ELEMENTOS
-                </button>
+            <!-- SECTION 8: PROGRAMADOR SENIOR -->
+            <section id="senior-dev" class="workspace-section">
+                <div class="section-header">
+                    <h2>👑 PROGRAMADOR SENIOR IA</h2>
+                    <p>Supervisão técnica de nível especialista. Audite regras de arquitetura complexas e fluxos de dados.</p>
+                </div>
+                <div class="engine-card glass-card">
+                    <div class="senior-audit-dashboard">
+                        <p>O cérebro sênior monitora ativamente as compilações do sistema para garantir padrões corporativos rígidos.</p>
+                        <button id="btn-run-senior-audit" class="btn-premium-neon"><i class="fa-solid fa-shield-halved"></i> DISPARAR AUDITORIA COMPLETA</button>
+                    </div>
+                </div>
+            </section>
 
-                <button id="resizeModeBtn">
-                    REDIMENSIONAR
-                </button>
+            <!-- SECTION 9: CONFIGURAÇÕES -->
+            <section id="settings" class="workspace-section">
+                <div class="section-header">
+                    <h2>⚙ CONFIGURAÇÕES DO MOTOR</h2>
+                    <p>Ajuste as diretrizes globais do compilador ultra futurista.</p>
+                </div>
+                <div class="engine-card glass-card">
+                    <p>Configurações de API, chaves de criptografia e parâmetros de renderização de partículas.</p>
+                </div>
+            </section>
 
-            </div>
+        </main>
+    </div>
 
-            <div id="editorCanvas">
-
-            </div>
-
-        </section>
-
-        <!-- AUDIO GOOGLE DRIVE -->
-        <section id="audioPanel" class="hidden">
-
-            <div class="audio-box">
-
-                <h2>
-                    GOOGLE DRIVE AUDIO
-                </h2>
-
-                <input 
-                    type="text"
-                    id="googleDriveUrl"
-                    placeholder="Cole URL do Google Drive">
-
-                <button id="loadAudioBtn">
-                    CARREGAR ÁUDIO
-                </button>
-
-                <audio
-                    id="audioPlayer"
-                    controls
-                    loop>
-
-                </audio>
-
-            </div>
-
-        </section>
-
-        <!-- INPUT -->
-        <div class="input-container">
-
-            <textarea
-                id="userInput"
-                placeholder="Digite aqui..."
-                maxlength="6000"></textarea>
-
-            <button id="sendButton">
-                ENVIAR
-            </button>
-
-        </div>
-
-        <!-- LOADING -->
-        <div id="loadingBox" class="hidden">
-            PROCESSANDO IA...
-        </div>
-
-    </main>
-
-</div>
-
-<!-- SCRIPTS -->
-
-<script src="js/main.js"></script>
-<script src="js/router.js"></script>
-<script src="js/particles.js"></script>
-<script src="js/api.js"></script>
-<script src="js/prompt-engine.js"></script>
-<script src="js/code-engine.js"></script>
-<script src="js/app-engine.js"></script>
-<script src="js/improve-engine.js"></script>
-<script src="js/visual-editor.js"></script>
-<script src="js/drag-system.js"></script>
-<script src="js/audio-drive.js"></script>
-<script src="js/preview-engine.js"></script>
-<script src="js/storage.js"></script>
-<script src="js/history.js"></script>
-<script src="js/export.js"></script>
-<script src="js/utils.js"></script>
-
+    <!-- ======================================================== -->
+    <!-- ARQUITETURA DE SCRIPTS EXTREMAMENTE MODULAR               -->
+    <!-- ======================================================== -->
+    <script src="js/utils.js"></script>
+    <script src="js/storage.js"></script>
+    <script src="js/history.js"></script>
+    <script src="js/particles.js"></script>
+    <script src="js/splash-screen.js"></script>
+    <script src="js/intro-animation.js"></script>
+    <script src="js/router.js"></script>
+    
+    <!-- Motores Inteligentes -->
+    <script src="js/prompt-engine.js"></script>
+    <script src="js/code-engine.js"></script>
+    <script src="js/app-engine.js"></script>
+    <script src="js/improve-engine.js"></script>
+    
+    <!-- Edição, Som e Render System -->
+    <script src="js/drag-system.js"></script>
+    <script src="js/visual-editor.js"></script>
+    <script src="js/audio-drive.js"></script>
+    <script src="js/preview-engine.js"></script>
+    <script src="js/export.js"></script>
+    
+    <!-- Arquivo Inicializador Principal -->
+    <script src="js/main.js"></script>
 </body>
 </html>
