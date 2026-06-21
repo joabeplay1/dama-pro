@@ -1,54 +1,277 @@
 <!DOCTYPE html>
-<html lang="pt-BR"><head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>JOABE PLAY DAMAS PRO</title>
-    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&amp;family=Roboto:wght@400;700&amp;display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="style.css">
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>JESUS REINA AI V3 ULTRA ENGINE</title>
+
+<link rel="stylesheet" href="style.css">
+
+<!-- ICONS -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;700;900&display=swap');
+</style>
+
 </head>
+
 <body>
-    <div class="game-container">
-        <header class="game-header">
-            <h1>JOABE PLAY DAMAS come mulher boa</h1>
-            <div class="controls-top">
-                <button id="undoBtn" class="control-btn">↩ Desfazer</button>
-                <div class="score-display">
-                    <span class="player-score">VOCÊ: <span id="playerScore">0</span></span>
-                    <span class="ai-score">IA: <span id="aiScore">0</span></span>
-                </div>
-                <div class="difficulty-selector">
-                    <label for="difficulty">Dificuldade:</label>
-                    <select id="difficulty" class="control-select">
-                        <option value="easy">Fácil</option>
-                        <option value="medium">Médio</option>
-                        <option value="hard">Difícil</option>
-                    </select>
-                </div>
-            </div>
-        </header>
 
-        <main class="game-main">
-            <div class="board-wrapper">
-                <div id="board" class="board"><div class="cell light" data-row="0" data-col="0"></div><div class="cell dark" data-row="0" data-col="1"></div><div class="cell light" data-row="0" data-col="2"></div><div class="cell dark" data-row="0" data-col="3"></div><div class="cell light" data-row="0" data-col="4"></div><div class="cell dark" data-row="0" data-col="5"><div class="piece ai"></div></div><div class="cell light" data-row="0" data-col="6"></div><div class="cell dark" data-row="0" data-col="7"><div class="piece ai"></div></div><div class="cell dark" data-row="1" data-col="0"><div class="piece ai"></div></div><div class="cell light" data-row="1" data-col="1"></div><div class="cell dark" data-row="1" data-col="2"><div class="piece ai"></div></div><div class="cell light" data-row="1" data-col="3"></div><div class="cell dark" data-row="1" data-col="4"><div class="piece ai"></div></div><div class="cell light" data-row="1" data-col="5"></div><div class="cell dark" data-row="1" data-col="6"><div class="piece ai"></div></div><div class="cell light" data-row="1" data-col="7"></div><div class="cell light" data-row="2" data-col="0"></div><div class="cell dark" data-row="2" data-col="1"><div class="piece ai"></div></div><div class="cell light" data-row="2" data-col="2"></div><div class="cell dark" data-row="2" data-col="3"><div class="piece ai"></div></div><div class="cell light" data-row="2" data-col="4"></div><div class="cell dark" data-row="2" data-col="5"></div><div class="cell light" data-row="2" data-col="6"></div><div class="cell dark" data-row="2" data-col="7"><div class="piece player selected"></div></div><div class="cell dark" data-row="3" data-col="0"><div class="piece ai"></div></div><div class="cell light" data-row="3" data-col="1"></div><div class="cell dark" data-row="3" data-col="2"><div class="piece ai"></div></div><div class="cell light" data-row="3" data-col="3"></div><div class="cell dark" data-row="3" data-col="4"></div><div class="cell light" data-row="3" data-col="5"></div><div class="cell dark" data-row="3" data-col="6"></div><div class="cell light" data-row="3" data-col="7"></div><div class="cell light" data-row="4" data-col="0"></div><div class="cell dark" data-row="4" data-col="1"></div><div class="cell light" data-row="4" data-col="2"></div><div class="cell dark" data-row="4" data-col="3"></div><div class="cell light" data-row="4" data-col="4"></div><div class="cell dark" data-row="4" data-col="5"></div><div class="cell light" data-row="4" data-col="6"></div><div class="cell dark" data-row="4" data-col="7"></div><div class="cell dark" data-row="5" data-col="0"><div class="piece player"></div></div><div class="cell light" data-row="5" data-col="1"></div><div class="cell dark" data-row="5" data-col="2"></div><div class="cell light" data-row="5" data-col="3"></div><div class="cell dark" data-row="5" data-col="4"></div><div class="cell light" data-row="5" data-col="5"></div><div class="cell dark" data-row="5" data-col="6"></div><div class="cell light" data-row="5" data-col="7"></div><div class="cell light" data-row="6" data-col="0"></div><div class="cell dark" data-row="6" data-col="1"><div class="piece player"></div></div><div class="cell light" data-row="6" data-col="2"></div><div class="cell dark" data-row="6" data-col="3"></div><div class="cell light" data-row="6" data-col="4"></div><div class="cell dark" data-row="6" data-col="5"></div><div class="cell light" data-row="6" data-col="6"></div><div class="cell dark" data-row="6" data-col="7"><div class="piece player"></div></div><div class="cell dark" data-row="7" data-col="0"><div class="piece player"></div></div><div class="cell light" data-row="7" data-col="1"></div><div class="cell dark" data-row="7" data-col="2"><div class="piece player"></div></div><div class="cell light" data-row="7" data-col="3"></div><div class="cell dark" data-row="7" data-col="4"><div class="piece player"></div></div><div class="cell light" data-row="7" data-col="5"></div><div class="cell dark" data-row="7" data-col="6"><div class="piece player"></div></div><div class="cell light" data-row="7" data-col="7"></div></div>
-                <div id="particleContainer" class="particle-container"></div>
-            </div>
-            <div class="game-info">
-                <p id="statusText" class="status-text">Sua vez</p>
-                <div class="controls-bottom">
-                    <button id="musicToggleBtn" class="control-btn" >🔇 Música: OFF</button>
-                    <button id="soundToggleBtn" class="control-btn" >🔕 Sons: OFF</button>
-                </div>
-            </div>
-        </main>
+<!-- PARTICLES -->
+<canvas id="particlesCanvas"></canvas>
 
-        <div id="victoryScreen" class="victory-screen hidden">
-            <h2 id="victoryTitle" class="victory-title"></h2>
-            <p id="victoryText" class="victory-text"></p>
-            <button id="playAgainBtn" class="play-again-btn">Jogar Novamente</button>
+<!-- FLOATING TEXT BACKGROUND -->
+<div id="floatingTextContainer"></div>
+
+<!-- SPLASH SCREEN -->
+<div id="splashScreen">
+
+    <div class="splash-overlay"></div>
+
+    <div class="splash-content">
+
+        <h1 class="main-logo">
+            JESUS REINA AI
+        </h1>
+
+        <p class="version-text">
+            ULTRA ENGINE V3
+        </p>
+
+        <div class="feature-cards">
+
+            <div class="feature-card">
+                ⚡ PROMPTS EXTREMOS
+            </div>
+
+            <div class="feature-card">
+                🧠 IA MELHORA APLICATIVOS
+            </div>
+
+            <div class="feature-card">
+                📱 CRIADOR DE APPS
+            </div>
+
+            <div class="feature-card">
+                🎨 EDITOR VISUAL
+            </div>
+
+            <div class="feature-card">
+                🎵 GOOGLE DRIVE AUDIO
+            </div>
+
+            <div class="feature-card">
+                👑 IA PROGRAMADOR SENIOR
+            </div>
+
         </div>
+
+        <button id="enterSystemBtn">
+            ENTRAR NO SISTEMA
+        </button>
+
     </div>
 
-    
+</div>
 
-<script src="script.js"></script>
-</body></html>
+<!-- MAIN APP -->
+<div id="appContainer" class="hidden">
+
+    <!-- SIDEBAR -->
+    <aside class="sidebar">
+
+        <div class="sidebar-logo">
+            JESUS REINA AI
+        </div>
+
+        <nav class="menu">
+
+            <button class="menu-btn active" data-mode="chat">
+                💬 CHAT IA
+            </button>
+
+            <button class="menu-btn" data-mode="prompt">
+                🧠 GERAR PROMPT PRO
+            </button>
+
+            <button class="menu-btn" data-mode="code">
+                ⚡ GERAR CÓDIGO PRO
+            </button>
+
+            <button class="menu-btn" data-mode="app">
+                📱 CRIAR APLICATIVO
+            </button>
+
+            <button class="menu-btn" data-mode="improve">
+                🛠 MELHORAR APP IA
+            </button>
+
+            <button class="menu-btn" data-mode="editor">
+                🎨 EDITOR VISUAL
+            </button>
+
+            <button class="menu-btn" data-mode="audio">
+                🎵 ÁUDIO GOOGLE DRIVE
+            </button>
+
+            <button class="menu-btn" data-mode="senior">
+                👑 PROGRAMADOR SENIOR
+            </button>
+
+            <button class="menu-btn" data-mode="config">
+                ⚙ CONFIG
+            </button>
+
+            <button class="menu-btn" data-mode="export">
+                📦 EXPORTAR
+            </button>
+
+        </nav>
+
+    </aside>
+
+    <!-- MAIN -->
+    <main class="main-panel">
+
+        <header class="top-bar">
+
+            <div id="modeTitle">
+                CHAT IA
+            </div>
+
+            <div class="status-box">
+                ● ONLINE
+            </div>
+
+        </header>
+
+        <!-- DYNAMIC AREA -->
+        <section id="workspace">
+
+            <!-- CHAT AREA -->
+            <div id="chatArea">
+
+                <div class="message bot">
+                    JESUS REINA AI iniciado...
+                </div>
+
+            </div>
+
+            <!-- PREVIEW ENGINE -->
+            <div id="previewPanel">
+
+                <div class="preview-header">
+                    LIVE PREVIEW
+                </div>
+
+                <iframe id="appPreview"></iframe>
+
+            </div>
+
+        </section>
+
+        <!-- VISUAL EDITOR -->
+        <section id="visualEditor" class="hidden">
+
+            <div class="editor-toolbar">
+
+                <button id="editTextBtn">
+                    EDITAR TEXTO
+                </button>
+
+                <button id="editImageBtn">
+                    TROCAR BANNER
+                </button>
+
+                <button id="dragModeBtn">
+                    ARRASTAR ELEMENTOS
+                </button>
+
+                <button id="resizeModeBtn">
+                    REDIMENSIONAR
+                </button>
+
+            </div>
+
+            <div id="editorCanvas">
+
+            </div>
+
+        </section>
+
+        <!-- AUDIO GOOGLE DRIVE -->
+        <section id="audioPanel" class="hidden">
+
+            <div class="audio-box">
+
+                <h2>
+                    GOOGLE DRIVE AUDIO
+                </h2>
+
+                <input 
+                    type="text"
+                    id="googleDriveUrl"
+                    placeholder="Cole URL do Google Drive">
+
+                <button id="loadAudioBtn">
+                    CARREGAR ÁUDIO
+                </button>
+
+                <audio
+                    id="audioPlayer"
+                    controls
+                    loop>
+
+                </audio>
+
+            </div>
+
+        </section>
+
+        <!-- INPUT -->
+        <div class="input-container">
+
+            <textarea
+                id="userInput"
+                placeholder="Digite aqui..."
+                maxlength="6000"></textarea>
+
+            <button id="sendButton">
+                ENVIAR
+            </button>
+
+        </div>
+
+        <!-- LOADING -->
+        <div id="loadingBox" class="hidden">
+            PROCESSANDO IA...
+        </div>
+
+    </main>
+
+</div>
+
+<!-- SCRIPTS -->
+
+<script src="js/main.js"></script>
+<script src="js/router.js"></script>
+<script src="js/particles.js"></script>
+<script src="js/api.js"></script>
+<script src="js/prompt-engine.js"></script>
+<script src="js/code-engine.js"></script>
+<script src="js/app-engine.js"></script>
+<script src="js/improve-engine.js"></script>
+<script src="js/visual-editor.js"></script>
+<script src="js/drag-system.js"></script>
+<script src="js/audio-drive.js"></script>
+<script src="js/preview-engine.js"></script>
+<script src="js/storage.js"></script>
+<script src="js/history.js"></script>
+<script src="js/export.js"></script>
+<script src="js/utils.js"></script>
+
+</body>
+</html>
